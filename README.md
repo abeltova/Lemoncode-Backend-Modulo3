@@ -738,5 +738,76 @@ filterStudentsBy(students, { age: 35 }).forEach(logStudent);
 ## Resultado Ejercicio 4
 
 ```ts
+const students: Student[] = [
+    {
+      name: "Luke Patterson",
+      age: 32,
+      occupation: "Internal auditor",
+    },
+    {
+      name: "Emily Coleman",
+      age: 25,
+      occupation: "English",
+    },
+    {
+      name: "Alexandra Morton",
+      age: 35,
+      occupation: "Conservation worker",
+    },
+    {
+      name: "Bruce Willis",
+      age: 39,
+      occupation: "Placement officer",
+    },
+];
 
+const filterStudentsBy = (students: Student[], criteria: unknown): Student[] => {
+    const criteriaForStudent = criteria as Student
+
+    return students.filter((user) => {
+        const criteriaKeys = Object.keys(criteriaForStudent);
+        return criteriaKeys.every((fieldName) => {
+            return criteriaForStudent[fieldName] === user[fieldName];
+        });
+    });
+};
+
+  
+const logStudent = ({ name, occupation }: Student) => {
+    console.log(`  - ${name}, ${occupation}`);
+};
+  
+console.log("Students of age 35:");
+filterStudentsBy(students, { age: 35 }).forEach(logStudent);
+```
+
+## Ejercicio 5
+
+Mediante genéricos y tuplas, tipa de forma completa la función para solventar los
+errores de compilación.
+
+```ts
+const swap = (arg1, arg2) => {
+  return [arg2, arg1];
+};
+
+let age: number, occupation: string;
+
+[occupation, age] = swap(39, "Placement officer");
+console.log("Occupation: ", occupation);
+console.log("Age: ", age);
+```
+
+## Resultado Ejercicio 5
+
+```ts
+const swap = <T, U>(arg1: T, arg2: U): [T, U] => {
+    return [arg1, arg2];
+};
+
+let age: number = 0, occupation: string = '';
+[age, occupation] = swap<number, string>(39, "Placement officer");
+
+console.log("Occupation: ", occupation);
+console.log("Age: ", age);
 ```

@@ -103,7 +103,7 @@ const logUser = (user: User) => {
  * ---------------------- EJERCICIO 4 ----------------------
  */
 
- const students: Student[] = [
+const students: Student[] = [
     {
       name: "Luke Patterson",
       age: 32,
@@ -124,20 +124,37 @@ const logUser = (user: User) => {
       age: 39,
       occupation: "Placement officer",
     },
-  ];
-  
-  const filterStudentsBy = (students: Student[], criteria: unknown): Student[] => {
+];
+
+const filterStudentsBy = (students: Student[], criteria: unknown): Student[] => {
+    const criteriaForStudent = criteria as Student
+
     return students.filter((user) => {
-      const criteriaKeys = Object.keys(criteria);
-      return criteriaKeys.every((fieldName) => {
-        return criteria[fieldName] === student[fieldName];
-      });
+        const criteriaKeys = Object.keys(criteriaForStudent);
+        return criteriaKeys.every((fieldName) => {
+            return criteriaForStudent[fieldName] === user[fieldName];
+        });
     });
-  };
+};
+
   
-  const logStudent = ({ name, occupation }: Student) => {
+const logStudent = ({ name, occupation }: Student) => {
     console.log(`  - ${name}, ${occupation}`);
-  };
+};
   
-  console.log("Students of age 35:");
-  filterStudentsBy(students, { age: 35 }).forEach(logStudent);
+// console.log("Students of age 35:");
+// filterStudentsBy(students, { age: 35 }).forEach(logStudent);
+
+/**
+ * ---------------------- EJERCICIO 5 ----------------------
+ */
+
+const swap = <T, U>(arg1: T, arg2: U): [T, U] => {
+    return [arg1, arg2];
+};
+
+let age: number = 0, occupation: string = '';
+[age, occupation] = swap<number, string>(39, "Placement officer");
+
+// console.log("Occupation: ", occupation);
+// console.log("Age: ", age);
