@@ -771,7 +771,6 @@ const filterStudentsBy = (students: Student[], criteria: unknown): Student[] => 
         });
     });
 };
-
   
 const logStudent = ({ name, occupation }: Student) => {
     console.log(`  - ${name}, ${occupation}`);
